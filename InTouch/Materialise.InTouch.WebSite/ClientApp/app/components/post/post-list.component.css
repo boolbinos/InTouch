@@ -1,0 +1,49 @@
+﻿.cursor {
+    cursor: pointer;
+}
+
+.inner-title {
+    color: black;
+    line-height: normal;
+}
+
+    .inner-title:hover {
+        color: #1c669c;
+    }
+
+.back-to-top-btn {
+    opacity: 0.5;
+    color: lightgray;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
+    z-index: 500;
+}
+
+    .back-to-top-btn:hover {
+        opacity: 1;
+        color: #2b90d9;
+        z-index: 500;
+    }
+
+h2 {
+    font-size: 2rem;
+}
+
+@media (max-width: 575px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+
+:host >>> .tooltip .tooltip-inner {
+    max-width: none;
+    white-space: nowrap;
+}
+
+.section-width {
+    min-width: 100%;
+}

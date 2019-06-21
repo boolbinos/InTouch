@@ -1,0 +1,36 @@
+﻿.img {
+    height: 100px; 
+    width:100%; 
+    max-width:100%; 
+    object-fit: cover;
+}
+#file {
+    visibility: hidden;
+    position: absolute;
+    overflow: hidden;
+    width: 0px;
+    height: 0px;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.images-section {
+    display: flex;
+    flex-direction: column;
+}
+.close:hover, .close:focus {
+    opacity: 1;
+    transition: 0.3s ease-in-out;
+}
+.close {
+    color: #a94442;
+    position: absolute;
+    opacity: 1;
+    right: 10%;
+    top: 5%
+}
+
+#content {
+    height: 200px;
+    resize: none;
+}

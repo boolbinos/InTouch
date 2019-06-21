@@ -1,0 +1,1 @@
+TASKKILL /im "cmd.exe" /fi "WINDOWTITLE eq [InTouch]:*"

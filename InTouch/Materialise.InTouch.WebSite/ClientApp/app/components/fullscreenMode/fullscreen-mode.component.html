@@ -1,0 +1,46 @@
+﻿<div class="container-fluid px-0 d-flex justify-content-center align-items-center" style="background-color: black;">
+    <carousel id="myCarousel" [noWrap]="true" [noPause]="true">
+        <div class="carousel-inner">
+            <slide class="item" *ngFor="let post of batch; let i = index" [class.active]="i==0">
+                <div class="row">
+                    <div [ngSwitch]="post.contentType">
+
+                        <div *ngSwitchCase="1" class="col-sm-12 animated align-items-center">
+                            <h1 class="text-center text-capitalize">{{post.title}}</h1>
+                        </div>
+
+                        <div *ngSwitchCase='2'>
+                            <div id="bottom_block">
+                                <h1 class="text-center">{{post.title}}</h1>
+                            </div>
+
+                            <img [src]="getPostImages(post.file.id)"
+                                 class="fullscreen_img"
+                                 alt="{{post.title}}">
+                        </div>
+
+                        <div *ngSwitchCase='3'>
+                            <img [src]="getPostImages(post.file.id)"
+                                 class="contain_img"
+                                 alt="{{post.title}}">
+                        </div>
+
+                        <div *ngSwitchCase='4'>
+                            <div id="video" class="bg-faded">
+                                <object id="video" class="embed-responsive-item" [data]="videoBlob"></object>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchDefault>
+                            <h1 class="justify-text">Default</h1>
+                        </div>
+                    </div>
+
+                </div>
+            </slide>
+        </div>
+    </carousel>
+</div>
+
+
+

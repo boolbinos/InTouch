@@ -1,0 +1,28 @@
+﻿<main class="post row d-flex justify-content-center mb-0 pb-0 pb-md-5">
+    <section class="col-lg-8 pb-0 pt-5 px-0 px-lg-2">
+
+        <div class="widget tags bg-white mb-2 ">
+            <header>
+                <h3 class="h6"><i class="fa fa-cloud-download" aria-hidden="true"></i> Import posts</h3>
+            </header>
+            <ul class="list-inline row">
+                <li class="col-md-3 col-6" (click)="importPosts('Facebook')">
+                    <button class="text-center btn btn-outline-primary btn-block">
+                        <i class="fa fa-facebook-square fa-4x py-2" aria-hidden="true"></i>
+                        <br />
+                       Facebook
+                    </button>
+                </li>
+                <li class="col-md-3 col-6" (click)="importPosts('Sharepoint')">
+                    <button class="text-center btn btn-outline-primary btn-block">
+                        <i class="ms-Icon--sharepoint fa-4x"></i>
+                        <br />
+                        Sharepoint
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <users-list></users-list>
+
+    </section>
+</main>

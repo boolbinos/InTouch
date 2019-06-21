@@ -1,0 +1,62 @@
+<header class="main-nav header">
+    <!-- Main Navbar-->
+    <nav class="navbar navbar-toggleable-md fixed-top custom-z-index">
+        <div class="container">
+            <!-- Navbar Brand -->
+            <div class="navbar-header d-flex align-items-center justify-content-between">
+                <a [routerLink]="['/posts']" (click)="redirect(); togglerClick();" class="navbar-brand animsition-link cursor">
+                    <img src="../../../../wwwroot/images/intouch.svg" height="40px" />InTouch
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+
+            <!-- Navbar Menu -->
+            <div id="navbarcollapse" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <form class="form-horizontal my-2 my-md-0 search-form" (ngSubmit)="onSearchSubmit(searchForm.value)" #searchForm="ngForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" maxlength="20" ngModel #search name="search" autocomplete="off" value={{searchInp}}>
+                                <span class="input-group-btn fa fa-search form-control-feedback ">
+                                </span>
+                            </div>
+                        </form>
+                    </li>
+
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a class="nav-link animsition-link cursor" (click)=" redirect(); togglerClick();" [routerLink]="['/posts']">
+                            Posts
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a class="nav-link animsition-link" (click)="togglerClick();" [routerLink]="['/createpost']">
+                            Create Post
+                        </a>
+                    </li>
+                    <li class="nav-item" [routerLinkActive]="['link-active']">
+                        <a class="nav-link animsition-link cursor" href="fullscreenmode" target="_blank" rel="nofollow">
+                            Fullscreen Mode
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" [routerLinkActive]="['link-active']" *ngIf="currentUser">
+                        <a class="nav-link dropdown-toggle cursor" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ showUserName(currentUser) }}
+                        </a>
+                        <div class="nav-item-empty dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="currentUser">
+                            <a class="dropdown-item" (click)="togglerClick();" *ngIf="currentUser && currentUser.roleName == 'Moderator'" [routerLink]="['/settings']">Settings</a>
+                            <a class="dropdown-item cursor" (click)="togglerClick();redirectToMyPosts();">My posts</a>
+                            <a class="dropdown-item" (click)="togglerClick();" [href]="this.baseUrl + 'Home/SignOut'">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+

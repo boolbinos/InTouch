@@ -1,0 +1,32 @@
+﻿<div *ngIf="!lastComments"><preloader></preloader></div>
+
+<section class="pb-0 pt-5 px-0 px-lg-2" [hidden]="!inIsPostsLoaded">
+    <div class="widget" style="margin-top:0" *ngIf="lastComments" id="widgetSide">
+
+        <header class="my-0">
+            <h3 class="h6">Latest comments<span class="no-of-comments"></span></h3>
+        </header>
+        <div class="comment" *ngFor="let item of lastComments | async">
+            <hr class="my-2" />
+            <a class="no-decoration" [routerLink]="['/posts/detail', item.postId]" fragment="comment{{item.commentId}}" [routerLinkActive]="['link-active']">
+                <div class="comment-header d-flex justify-content-between mb-1">
+                    <div class="d-flex align-items-center">
+                            <div class="title">
+                                <strong>{{item.postTitle | textTruncate: 40: '...'}}</strong>
+                            </div>
+                    </div>
+                </div>
+                <div class="comment-body">
+
+                    <p class="dont-break-out my-0 py-1">
+                        <strong>{{item.authorFirstName}} {{item.authorLastName}}:</strong> {{item.commentContent | textTruncate: 75: '...'}}
+                    </p>
+
+                    
+                    <span><i class="fa fa-clock-o"></i> {{ item.createdDate | date:'short'}}</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>

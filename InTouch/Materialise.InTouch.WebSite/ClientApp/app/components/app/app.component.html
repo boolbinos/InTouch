@@ -1,0 +1,25 @@
+﻿<div [ngSwitch]="hideNav">
+    <div *ngSwitchCase="1">
+        <div id="fullscreen">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div *ngSwitchDefault>
+        <div id="snackbar"></div>
+        <p-confirmDialog header="Delete confirmation" responsive="true"></p-confirmDialog>
+
+        <div class="container">
+            <nav-menu class="row"></nav-menu>
+            <p-growl [(value)]="msgs" sticky="autoClose"></p-growl>
+            <router-outlet></router-outlet>
+            <hr/>
+            <footer class="row d-flex justify-content-center mb-5">
+                <div>
+                    <a class="about" [routerLink]="['/about']">
+                        &copy; Materialise Academy 2017
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>

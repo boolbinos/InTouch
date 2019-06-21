@@ -1,0 +1,31 @@
+﻿<div *ngIf="!users"><preloader></preloader></div>
+<div *ngIf="users">
+    <div class="widget bg-white mb-2">
+        <header>
+            <h3 class="h6"><i class="fa fa-users" aria-hidden="true"></i> Users</h3>
+        </header>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Is Moderator</th>
+                </tr>
+                </thead>
+                <tbody class="table-active">
+                <tr *ngFor="let user of users">
+                    <td>{{user.firstName}} {{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <input type="checkbox" name="role" (change)="assignRole(user)"
+                               [checked]="user.roleName==='Moderator'" [disabled]="user.id===1 || !currentUser || user.id===currentUser.id" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,25 @@
+﻿.cursor {
+    cursor: pointer;
+}
+
+.comment {
+    position: relative;
+}
+
+.comment-delete-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.comment-delete-sign {
+    color: #888;
+}
+
+.comment-delete-sign:hover {
+    color: #000;
+}
+
+.small-text {
+    font-size: 12px;
+}

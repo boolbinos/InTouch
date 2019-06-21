@@ -1,0 +1,109 @@
+.cursor {
+    cursor: pointer;
+}
+
+.custom-z-index {
+    z-index: 1001 !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.nav-item {
+    display: inline-block;
+    position: relative;
+}
+
+    .nav-item a:hover {
+        color: #1c669c;
+        background-color: white;
+    }
+
+    .nav-item a:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -3px;
+        left: 0;
+        background-color: #1c669c;
+        visibility: hidden;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transition: all 0.15s ease-in-out 0s;
+        transition: all 0.15s ease-in-out 0s;
+    }
+
+.nav-item-empty a:before {
+    background-color: transparent;
+}
+
+.nav-item a:hover:before, .nav-item a.active:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+.link-active a:not(.dropdown-item) {
+    color: #1c669c;
+}
+ 
+
+
+
+/*search form styles*/
+
+.search-form .input-group {
+    float: right !important;
+    width: 100%;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+    .search-form .input-group input.form-control {
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        display: block;
+        padding-bottom: 3px;
+        padding-right: 25px;
+        margin-top: -8px;
+    }
+
+        .search-form .input-group input.form-control::-webkit-input-placeholder {
+            display: none;
+        }
+
+        .search-form .input-group input.form-control:-moz-placeholder {
+            display: none;
+        }
+
+        .search-form .input-group input.form-control::-moz-placeholder {
+            display: none;
+        }
+
+        .search-form .input-group input.form-control:-ms-input-placeholder {
+            display: none;
+        }
+
+    .search-form .input-group:hover,
+    .search-form .input-group.hover {
+        width: 100%;
+        border-radius: 25px 25px 25px 25px;
+    }
+
+    .search-form .input-group span.form-control-feedback {
+        position: absolute;
+        top: -5px;
+        bottom: 0;
+        right: -2px;
+        left: 5px;
+        display: block;
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        left: initial;
+        font-size: 14px;
+    }

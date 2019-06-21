@@ -1,0 +1,36 @@
+
+
+<app asp-ng2-prerender-module="ClientApp/dist/main-server">
+    <div class="preloader-wrapper d-flex justify-content-center align-items-center">
+        <div class="preloader d-flex align-items-center flex-column">
+            <div class='triangles mb-3'>
+                <div class='tri invert'></div>
+                <div class='tri invert'></div>
+                <div class='tri'></div>
+                <div class='tri invert'></div>
+                <div class='tri invert'></div>
+                <div class='tri'></div>
+                <div class='tri invert'></div>
+                <div class='tri'></div>
+                <div class='tri invert'></div>
+            </div>
+            <div>
+                <h3 class="intouch-loading">InTouch is loading...</h3>
+            </div>
+        </div>
+    </div>
+</app>
+
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js" asp-append-version="true"></script>
+<script src="~/js/jquery.cookie.js" asp-append-version="true"></script>
+<script src="~/js/animsition.min.js" asp-append-version="true"></script>
+<script src="~/js/front.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}
+@section styles {
+    <link href="~/css/preloader.css" rel="stylesheet" type="text/css" />
+}
+<script src="~/dist/quill.js" asp-append-version="true"></script>
+

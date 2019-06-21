@@ -1,0 +1,106 @@
+﻿:host >>> .carousel-control {
+    display: none;
+}
+
+:host >>> .carousel-indicators li {
+    display: none;
+}
+
+.animated {
+    overflow: hidden;
+    width: 103vw;
+    height: 100vh;
+    background: linear-gradient(-45deg, #ffffff, #6ba4ff, #00b1ea, #0058a5);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
+}
+
+    .animated h1 {
+        margin-top: 25%;
+    }
+
+.container-fluid {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    color: #fff;
+    background-color: black;
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+#bottom_block {
+    z-index: 100;
+    position: absolute;
+    bottom: 0;
+    min-height: 8vw;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    width: 100%;
+    left: 0;
+}
+
+    #bottom_block h1 {
+        margin: 0;
+    }
+
+.fullscreen_img {
+    object-fit: cover;
+    width: 103vw;
+    height: 100vh;
+}
+
+.contain_img {
+    object-fit: contain;
+    height: 100vh;
+}
+
+#video {
+    width: 102vw;
+    height: 100vh;
+}

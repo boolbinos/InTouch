@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <Configurations>Debug;Release;Test;Production</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.6.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Providers\Facebook\" />
+    <Folder Include="Providers\Implementations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Materialise.InTouch.DAL\InTouch.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

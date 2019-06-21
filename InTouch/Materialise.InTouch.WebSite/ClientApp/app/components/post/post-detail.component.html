@@ -1,0 +1,82 @@
+﻿<div *ngIf="!post" class="preloader-wrapper">
+    <preloader></preloader> 
+</div>
+
+<main class="post row d-flex justify-content-center mb-0 pb-0 pb-md-5">
+    <section class="col-lg-8 pb-0 pt-5 px-0 px-lg-2">
+        <!--start with template-->
+        <div *ngIf="post" class="post-single widget bg-white">
+            <!--start post detail-->
+            <div class="post-details">
+                <header class="row">
+                    <div class="col-10 ui-overflow-hidden">
+                        <h1 class="h2 inner-title">{{ post.title }}</h1>
+                    </div>
+
+                    <div *ngIf="currentUser && (currentUser.roleName == 'Moderator' || currentUser.id == post.userId)" class="col-2">
+                        <div class="pull-right dropdown mt-3 mr-2">
+                            <a class="cursor" id="postDropdown" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="postDropdown">
+                                <a *ngIf="checkAccess(post)" class="dropdown-item small" routerLink="/posts/edit/{{post.id}}">Edit</a>
+                                <a *ngIf="checkAccess(post)" class="dropdown-item small cursor" nohref (click)="confirm(post)">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!--start post info-->
+                <post-info [post]="post"></post-info>
+                <!--end post info-->
+
+                <!--start post text-->
+                <article class="ql-editor no-padding mb-3 mt-3 ui-overflow-hidden" [innerHtml]="post.content"></article>
+                <!--end post text-->
+                <!--start post video-->
+
+
+                <div *ngIf="post.videoUrl!=null" class="embed-responsive embed-responsive-16by9 mb-5">
+                    <iframe id="videoHtml" width="640" height="360" [src]="url" allowfullscreen></iframe>
+                </div>
+                <!--end post video-->
+                <!--start gallery-->
+                <ngx-gallery *ngIf="files.length>0" [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                <!--end gallery-->
+            </div>
+            <!--end post detail-->
+            <hr class="my-2" />
+            <!-- start controls section -->
+            <div class="py-0 small">
+
+          
+                <a (click)="goOnPrevious()" class="cursor link-color"> <i class="fa fa-arrow-left mr-1" aria-hidden="true"></i>Back </a>
+
+                <div class="pull-right">
+                    <span *ngIf="showStatus(post)===true" [ngSwitch]="getStatus(post)" class="ml-2">
+                        <ng-template [ngSwitchCase]="true">
+                            <a (click)="doPrivate(post)" [routerLink]="getCurrentLocation()">
+                                <i class="fa fa-unlock-alt" aria-hidden="true"></i> Public
+                            </a>
+                        </ng-template>
+                        <ng-template [ngSwitchCase]="false">
+                            <a (click)="doPublic(post)" [routerLink]="getCurrentLocation()">
+                                <i class="fa fa-lock" aria-hidden="true"></i> Private
+                            </a>
+                        </ng-template>
+                    </span>
+                    <span class="ml-2">
+                        <a nohref class="text-primary cursor" (click)="likeClick(likes)" tooltip={{getLikersName(likes)}} placement="left">
+                            <i [ngClass]="isPostLiked(likes)? 'fa fa-heart': 'fa fa-heart-o'"></i>
+                            <span>{{getLikesCount(likes)}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <!-- end controls section -->
+            <comment-list *ngIf="comments" id="comments"  [comments]="comments" [post]="post"></comment-list>
+        </div>
+
+    </section>
+</main>
+

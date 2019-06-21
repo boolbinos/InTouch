@@ -1,0 +1,22 @@
+﻿.preloader-wrapper {
+    border: 1px solid transparent;
+    padding-top: 40vh;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.link-color {
+    color:rgb(43,144,217) !important;
+}
+
+.carousel-inner {
+    width: 100%;
+    height: 300px !important;
+}
+
+:host >>> .tooltip .tooltip-inner {
+    max-width: none;
+    white-space: nowrap;
+}

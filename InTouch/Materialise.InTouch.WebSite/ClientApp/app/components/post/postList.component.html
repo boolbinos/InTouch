@@ -1,0 +1,87 @@
+﻿<a *ngIf="isPageScrolled" class="hidden-md-down" (click)="jumpToTop()">
+    <i class="fa fa-arrow-circle-up fa-3x back-to-top-btn" ></i>
+</a>
+
+<div class="row">
+    <main class="col-lg-8 post d-flex justify-content-center mb-0 pb-0 pb-md-5 px-0 px-md-3 pr-lg-0">
+        <section class="pb-0 pt-5 px-0 px-lg-2 section-width" id="post-list-section">
+            <div *ngIf="posts && currentUser" class="col-lg-12 px-0 px-lg-2 mb-4" id="main">
+
+                <div *ngIf="!invisibleEmptyList">
+                    <p class="lead">Posts not found...</p>
+                </div>
+
+                <article id="{{post.id}}" *ngFor="let post of posts " class="widget mb-2 py-3 bg-white">
+                    <header class="row">
+                        <div class="col-10 ui-overflow-hidden">
+                            <a (click)="selectedPost = post; $event.which == 1 ? persistPostNavigatingTo() : null" [routerLink]="['/posts/detail', post.id]" [routerLinkActive]="['link-active']">
+                                <h2 class="inner-title m-0">{{ post.title }}</h2>
+                            </a>
+                        </div>
+                        <div *ngIf="checkAccess(post)" class="col-2">
+
+                            <div class="pull-right dropdown  mt-3 mr-2">
+                                <a class="cursor" id="postDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="postDropdown">
+                                    <a *ngIf="checkAccess(post)" class="dropdown-item small" routerLink="/posts/edit/{{post.id}}">Edit</a>
+                                    <a *ngIf="checkAccess(post)" class="dropdown-item small cursor" nohref (click)="confirm(post)">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- start post info-->
+                    <post-info [post]="post"></post-info>
+                    <!-- end post info-->
+
+                    <div *ngFor=" let item of post.files; let i=index">
+                        <img *ngIf="i<1" [src]="getImagesPosts(item.id)" class="img-responsive" style="width: 100%; height: 300px; object-fit: cover">
+                    </div>
+
+                    <div class="ql-editor pb-0 px-0 ui-overflow-hidden" [innerHtml]="post.content | textTruncate: this.maxLength: '...'"></div>
+                    <hr class="my-2" />
+                    <div class="py-0 small">
+
+                        <a class="" (click)="selectedPost = post; $event.which == 1 ? persistPostNavigatingTo() : null" [routerLink]="['/posts/detail', post.id]"> Read more </a>
+
+                        <div class="pull-right">
+                            <span *ngIf="showStatus(post)===true" [ngSwitch]="getStatus(post)"  class="ml-2">
+                                <ng-template [ngSwitchCase]="true">
+                                    <a (click)="doPrivate(post)" [routerLink]="getCurrentLocation()">
+                                        <i class="fa fa-unlock-alt" aria-hidden="true"></i> Public
+                                    </a>
+                                </ng-template>
+                                <ng-template [ngSwitchCase]="false">
+                                    <a (click)="doPublic(post)" [routerLink]="getCurrentLocation()">
+                                        <i class="fa fa-lock" aria-hidden="true"></i> Private
+                                    </a>
+                                </ng-template>
+                            </span>
+                            <span class="ml-2">
+                                <a routerLink="/posts/detail/{{post.id}}" fragment="comments" tooltip="comments" data-container="body" placement="bottom">
+                                    <i class="fa fa-comment-o"></i>
+                                    <span>{{post.commentsAmount}}</span>
+                                </a>
+                            </span>
+                            <span class="ml-2">
+                                <a nohref class="text-primary cursor" (click)="likeClick(post)" tooltip={{getLikersName(post)}} data-container="body" placement="bottom">
+                                    <i [ngClass]="isPostLiked(post)? 'fa fa-heart': 'fa fa-heart-o'"></i>
+                                    <span>{{getLikesCount(post)}}</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                </article>
+            </div>
+            <preloader *ngIf="!getIsDataLoadedValue()"></preloader>
+        </section>
+    </main>
+
+    <aside class="col-lg-4 pl-lg-0 hidden-md-down" id="sidebar">
+        <latest-comments [isPostsLoaded]="postListLoaded"></latest-comments>
+    </aside>
+
+</div>

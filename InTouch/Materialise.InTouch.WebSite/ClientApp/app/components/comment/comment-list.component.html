@@ -1,0 +1,26 @@
+﻿<div class="add-comment mt-4">
+    <form (ngSubmit)="createComment(inPost)" (keyup.enter)="createComment(inPost)" #postForm="ngForm">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <textarea name="content"
+                          id="content"
+                          placeholder="Type your comment..."
+                          class="form-control"
+                          [(ngModel)]="createCommentModel.content"
+                          required maxlength="8000"></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <button type="submit"
+                        class="btn submit"
+                        [disabled]="!postForm.form.valid">
+                    Leave Comment
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <div *ngFor="let comment of inComments">
+        <comment [comment]="comment" [comments]="inComments" id="{{ 'comment' + comment.id }}"></comment>
+    </div>
+</div>

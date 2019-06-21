@@ -1,0 +1,37 @@
+﻿<div class="row">
+    <div class="py-0 mb-4 col-12 small">
+        <div class="text-muted d-flex align-items-center flex-column flex-sm-row">
+            <div [ngSwitch]="post.avatar" class="avatar mr-1" tooltip="Author" placement="top">
+                <ng-template [ngSwitchCase]="null">
+                    <i class="fa fa-user-circle-o fa-3x " style="font-size: 30px" aria-hidden="true"></i>
+                </ng-template>
+                <ng-template ngSwitchDefault>
+                    <img class="img-fluid rounded-circle" [src]="'data:image/gif;base64,'+post.avatar" alt="Avatar" />
+                </ng-template>
+            </div>
+            <div>{{ post.userName }}</div>
+            <div class="d-flex align-items-center flex-wrap">
+                <span class="mx-1">|</span>
+                <div>
+                    <i tooltip="Created on" placement="top" class="fa fa-clock-o"></i> {{ post.createdDate | date:'short'}}
+                </div>
+                <span *ngIf="hasAdditionContent()" class="mx-1">|</span>
+                <div *ngIf="post.priority=='High'" tooltip="Important post" placement="top">
+                    <i class="fa fa-bolt mr-1" aria-hidden="true"></i>
+                </div>
+
+                <div *ngIf="post.videoUrl!=null" tooltip="Video in post" placement="top">
+                    <i class="fa fa-video-camera mr-1" aria-hidden="true"></i>
+                </div>
+
+                <div *ngIf="post.postType=='Facebook'" tooltip="Facebook post" placement="top">
+                    <i class="fa fa-facebook mr-1" aria-hidden="true"></i>
+                </div>
+
+                <div *ngIf="post.postType=='Sharepoint'" tooltip="Sharepoint post" placement="top">
+                    <i class="ms-Icon--sharepoint px-0"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

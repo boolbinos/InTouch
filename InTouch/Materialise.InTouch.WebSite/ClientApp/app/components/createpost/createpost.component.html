@@ -1,0 +1,157 @@
+﻿<main *ngIf="postCreating" class="post row d-flex justify-content-center mb-0 pb-0 pb-md-5 mt-5">
+    <preloader></preloader>
+</main>
+<main *ngIf="!postCreating" class="post row d-flex justify-content-center mb-0 pb-0 pb-md-5">
+    <section class="col-lg-8 py-0 pt-5 px-0 px-lg-2">
+
+        <div class="post-wrapper widget bg-white">
+            <div [hidden]="submitted">
+                <form (ngSubmit)="onSubmit()" #postForm="ngForm" style="margin-top:20px;">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="title"
+                               required maxlength="100"
+                               [(ngModel)]="model.title" name="title"
+                               #title="ngModel" placeholder="Title">
+                        <div [hidden]="title.valid || title.pristine"
+                             class="alert alert-danger">
+                            Title is required
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p-editor [(ngModel)]="model.content"
+                                  styleClass="editor-dimensions" id="content"
+                                  name="content"
+                                  required maxlength="50000"
+                                  #content="ngModel" [style]="{'height':'320px'}"
+                                  placeholder="Your content goes here...">
+                            <p-header>
+                                <span class="ql-formats">
+                                    <select class="ql-size" placement="bottom" tooltip="Font size"></select>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-bold" tabindex="-1" placement="bottom" tooltip="Bold"></button>
+                                    <button class="ql-italic" tabindex="-1" placement="bottom" tooltip="Italic"></button>
+                                    <button class="ql-underline" tabindex="-1" placement="bottom" tooltip="Underline"></button>
+                                    <button class="ql-strike" tabindex="-1" placement="bottom" tooltip="Strike"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-blockquote" tabindex="-1" placement="bottom" tooltip="Quote"></button>
+                                    <button class="ql-link" tabindex="-1" placement="bottom" tooltip="Link"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-list" value="ordered" tabindex="-1" placement="bottom" tooltip="Ordered list"></button>
+                                    <button class="ql-list" value="bullet" tabindex="-1" placement="bottom" tooltip="Bullet list"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-clean" tabindex="-1" placement="bottom" tooltip="Clear formatting"></button>
+                                </span>
+                            </p-header>
+                        </p-editor>
+                        <div *ngIf="!content" [hidden]="content.valid || content.pristine"
+                             class="alert alert-danger">
+                            <span [hidden]="content.model.length > 50000">
+                                Content is required
+                            </span>
+                            <span [hidden]="content.model.length < 50000">
+                                You have exceeded the maximum number of characters
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--start image upload section-->
+                    <section class="images-section py-0">
+                        <div class="form-group">
+                            <button (click)="files.click()" type="button" class="btn btn-primary">Upload Images</button>
+                            <div *ngIf="!!error"
+                                 class="alert alert-danger">
+                                <span>
+                                    {{this.error}}
+                                </span>
+                            </div>
+                            <input id="file"
+                                   type="file"
+                                   name="file"
+                                   #files
+                                   ng2FileSelect
+                                   [uploader]="imageUploader"
+                                   accept="image/jpeg,image/png,image/jpg"
+                                   multiple />
+                        </div>
+                        <div class="form-group">
+                            <div class="row px-0 mx-0">
+                                <div *ngFor="let item of queuedImages; let i = index;" class="col-xl-3 col-lg-3 col-md-3 col-4 px-0 ui-overflow-hidden">
+
+                                    <img *ngIf="uploadedImages[i] as image" [hidden]="!isImageLoaded(i)" class="img pr-1 pb-1" (load)="setImageUploaded(i)" [src]="getImageUrl(image)" />
+                                    <div *ngIf="!isImageLoaded(i)" class="img pr-1 pb-1">
+                                        <preloader></preloader>
+                                    </div>
+                                   
+                                    <button type="button" (click)="deleteItem(item)" class="close" aria-label="Close">
+                                        <i class='fa fa-times'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--end image upload section-->
+
+                    <div class="form-group small">
+                        <input type="text" class="form-control" id="videoUrl" pattern="https:\/\/(materialisenv\.sharepoint\.com)|(youtu.be)|(www.youtube.com\/watch\?v=)|(/www.youtube.com\/embed).+"
+                               [(ngModel)]="model.videoUrl" name="videoUrl"
+                               #videoUrl="ngModel" placeholder="Video url">
+                        <div *ngIf="videoUrl.errors" class="alert alert-danger">Invalid Url</div>
+                    </div>
+
+                    <div *ngIf="currentUser">
+                        <div *ngIf="isModerator(currentUser)" class="row small">
+                            <div class="form-group col-6" *ngIf="model.videoUrl!='' && !videoUrl.errors">
+                                <label for="durationInSeconds">Video display time (s):</label>
+                                <input type="number" min="1" class="form-control" id="durationInSeconds"
+                                       required
+                                       [(ngModel)]="model.durationInSeconds" name="durationInSeconds"
+                                       #durationInSeconds="ngModel">
+                                <div [hidden]="durationInSeconds.valid || durationInSeconds.pristine"
+                                     class="alert alert-danger">
+                                    DurationInSeconds is required
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-6">
+                                <label for="priority">Post priority:</label>
+                                <select class="form-control" id="priority"
+                                        required
+                                        [(ngModel)]="model.priority" name="priority"
+                                        #priority="ngModel">
+                                    <option selected="selected">Normal</option>
+                                    <option>High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="currentUser !== undefined" class="form-group row" [hidden]="!isModerator(currentUser)">
+                        <label class="col-12 col-md-6">
+                            <span class="small">Start date:</span>
+                            <p-calendar [(ngModel)]="startDate" [showIcon]="true" name="startDate" showTime="showTime" hourFormat="24" [readonlyInput]="true" required></p-calendar>
+                        </label>
+                        <label class="col-12 col-md-6">
+                            <span class="small">End date:</span>
+                            <p-calendar [(ngModel)]="endDate" [showIcon]="true" name="endDate" showTime="showTime" hourFormat="24" [minDate]="startDate" [readonlyInput]="true" required></p-calendar>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit"
+                                class="btn btn-success"
+                                [disabled]="!postForm.form.valid || imageUploader.isUploading">
+                            Submit
+                        </button>
+                        <button type="button" class="btn btn-default" (click)="goBack()">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </section>
+</main>

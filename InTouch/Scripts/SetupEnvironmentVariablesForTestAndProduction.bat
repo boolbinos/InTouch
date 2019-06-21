@@ -1,0 +1,3 @@
+%windir%\system32\inetsrv\appcmd.exe set config -section:system.applicationHost/applicationPools /+"[name='intouch.test'].environmentVariables.[name='ASPNETCORE_ENVIRONMENT',value='Test']" /commit:apphost
+
+%windir%\system32\inetsrv\appcmd.exe set config -section:system.applicationHost/applicationPools /+"[name='intouch.production'].environmentVariables.[name='ASPNETCORE_ENVIRONMENT',value='Production']" /commit:apphost

@@ -1,0 +1,25 @@
+﻿<div class="comment" *ngIf="currentUser">
+    <a *ngIf="currentUser.id === comment.userId || currentUser.roleName === 'Moderator'" (click)="confirmCommentDelete(inComment)" class="comment-delete-link cursor"><span class="fa fa-times comment-delete-sign" aria-hidden="true"></span></a>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center flex-wrap">
+            <div [ngSwitch]="inComment.avatar">
+                <ng-template [ngSwitchCase]="null">
+                    <div class="mr-2 avatar-wrapper d-flex justify-content-center align-items-center">
+                        <i class="fa fa-user-circle-o fa-2x avatar" aria-hidden="true"></i>
+                    </div>
+                </ng-template>
+                <ng-template ngSwitchDefault>
+                    <div class="mr-2 avatar-wrapper">
+                        <img class="avatar" [src]="'data:image/gif;base64,'+inComment.avatar" alt="Avatar" />
+                    </div>
+                </ng-template>
+            </div>
+            <strong class="small-text">{{inComment.userFirstName + ' ' + inComment.userLastName}}&nbsp;</strong>
+            <span class="small-text">&nbsp;{{inComment.createdDate | date:'short'}}</span>
+        </div>
+    </div>
+    <div class="mt-2">
+        <p style="word-wrap: break-word">{{inComment.content}}</p>
+    </div>
+    <hr/>
+</div>
