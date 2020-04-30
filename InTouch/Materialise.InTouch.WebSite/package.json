@@ -40,7 +40,7 @@
     "font-awesome": "4.7.0",
     "html-loader": "0.4.5",
     "isomorphic-fetch": "2.2.1",
-    "jquery": "3.2.1",
+    "jquery": "3.5.0",
     "json-loader": "0.5.4",
     "ng2-owl-carousel": "^0.1.15",
     "ng2-simple-page-scroll": "^2.0.0",
